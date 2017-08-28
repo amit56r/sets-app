@@ -78,7 +78,6 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board />
         </div>
         <div className="game-info">
           <div>{/* status */}</div>
@@ -87,7 +86,9 @@ class Game extends React.Component {
           </div>
         </div>
         <div>
-          <Card/>
+          <Card shape="Pill"/>
+          <Card shape="Diamond"/>
+          <Card shape="Squiggle"/>
         </div>
       </div>
     );
