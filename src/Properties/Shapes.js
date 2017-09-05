@@ -1,22 +1,20 @@
 import React from 'react';
 
-
 function offsetString(offset, gap){
 	let offset_value = offset * (gap + 20);
-	return "translate(0 " + offset_value + ")"
+	return "translate(" + offset_value + ",0)";
 }
-
 
 class Pill extends React.Component{
 	constructor(props){
 		super(props);
 		this.dimensions = {
-			width: 150,
-			height: 60,
+			width: 60,
+			height: 150,
 			rx: 30,
 			ry: 30,
-			x: 40,
-			y: 150,
+			x: 150,
+			y: 40,
 		};
 
 	}
@@ -33,8 +31,8 @@ class Pill extends React.Component{
         	fill={this.props.fill}
         	stroke={this.props.color}
         	strokeWidth={5}
-        	transform={offsetString(this.props.offset, this.dimensions.height)}
-        	/>
+        	transform={offsetString(this.props.offset, this.dimensions.width)}
+        />
     )
   }
 }
@@ -44,12 +42,12 @@ class Diamond extends React.Component{
 	render() {
     return (
         <polygon
-        	points="30,180 117,145 205,180 117,215"
+            points="180,30 145,117 180,205 215,117"
         	fill={this.props.fill}
         	stroke={this.props.color}
         	strokeWidth={5}
         	transform={offsetString(this.props.offset, 65)}
-        	/>
+        />
     )
   }
 }
@@ -59,12 +57,12 @@ class Squiggle extends React.Component{
 	render() {
     return (
         <path
-            d="m 33,180 c 6,-13 11,-23 26,-28 15,-5 31,-1 58,7 23,7 36,0 43,-3 7,-4 17,-9 30,-9 13,0 18,21 12,33 -5,11 -14,23 -26,28 -12,5 -32,1 -59,-7 -17,-5 -29,-3 -42,3 -9,4 -18,10 -30,9 -13,0 -19,-18 -12,-33 z"
+            d="m 180,33 c -13,6 -23,11 -28,26 -5,15 -1,31 7,58 7,23 0,36 -3,43 -4,7 -9,17 -9,30 0,13 21,18 33,12 11,-5 23,-14 28,-26 5,-12 1,-32 -7,-59 -5,-17 -3,-29 3,-42 4,-9 10,-18 9,-30 0,-13 -18,-19 -33,-12 z"
         	fill={this.props.fill}
         	stroke={this.props.color}
         	strokeWidth={5}
         	transform={offsetString(this.props.offset, 65)}
-        	/>
+        />
     )
   }
 }

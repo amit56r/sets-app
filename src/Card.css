@@ -1,6 +1,14 @@
-#svg {
+/*#svg {
   overflow: visible;
   width: 100%;
+}*/
+
+.card {
+  display: table-cell;
+  padding: 20px;
+  cursor: pointer;
 }
 
-
+.card > svg > rect:hover{
+	fill: honeydew;
+}

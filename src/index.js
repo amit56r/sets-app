@@ -4,6 +4,6 @@ import { Game } from './App'
 import './index.css';
 
 ReactDOM.render(
-  <Game />,
+  <Game/>,
   document.getElementById('root')
 );

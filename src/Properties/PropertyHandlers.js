@@ -7,6 +7,15 @@ class DefaultProperty extends React.Component{
 		this.processProps();
 	}
 
+	static getStructure(){
+		return {
+			shape: ['Pill', 'Diamond', 'Squiggle'],
+			number: [1, 2, 3],
+			color: ['Red', 'Green', 'Purple'],
+			fill: [' Solid', 'Open', 'Hatch'],
+		};
+	}
+
 	processProps(){
 		//Shape
 		switch (this.props.shape){
@@ -33,13 +42,14 @@ class DefaultProperty extends React.Component{
 				this.fill = this.color;
 				break;
 			case "Open":
-				this.fill = "White";
+				this.fill = "None";
 				break;
 			case "Hatch":
-				this.fill = "url(#Hatch)";
+				this.fillUrl = `Hatch${this.color}`;
+				this.fill = `url(#${this.fillUrl})`;
 				break;
 			default:
-				this.fill = 'White';
+				this.fill = "None";
 				break;
 
 		}
@@ -71,11 +81,11 @@ class DefaultProperty extends React.Component{
 
 	generatePattern(){
 		let pattern = null;
-		if (this.props.fill === "Hatch"){
+		if (this.fillUrl){
 			pattern = (
 				<defs>
-					<pattern id="Hatch" width={8} height={1} patternUnits="userSpaceOnUse">>
-    					<line x1={0} y1={1} stroke={this.color} strokeWidth={2}/>
+					<pattern id={this.fillUrl} width={1} height={8} patternUnits="userSpaceOnUse">>
+    					<line x1={1} y1={0} stroke={this.color} strokeWidth={2}/>
     				</pattern>
     			</defs>
 			)
