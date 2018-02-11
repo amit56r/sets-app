@@ -12,3 +12,7 @@
 .card > svg > rect:hover{
 	fill: honeydew;
 }
+
+.card.selected > svg > rect{
+	fill: lightgoldenrodyellow;
+}

@@ -16,3 +16,12 @@ body {
   flex-direction: row;
 }
 
+.card {
+  display: table-cell;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.card > div > svg > rect:hover{
+  fill: honeydew;
+}

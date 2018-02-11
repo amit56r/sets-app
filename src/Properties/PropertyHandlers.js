@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 import React from 'react';
 import { Pill, Diamond, Squiggle } from './Shapes';
 
@@ -12,8 +13,12 @@ class DefaultProperty extends React.Component{
 			shape: ['Pill', 'Diamond', 'Squiggle'],
 			number: [1, 2, 3],
 			color: ['Red', 'Green', 'Purple'],
-			fill: [' Solid', 'Open', 'Hatch'],
+			fill: ['Solid', 'Open', 'Hatch'],
 		};
+	}
+
+	static encodeProperty(property){
+		return `${property.shape[0]}${property.number}${property.color[0]}${property.fill[0]}`;
 	}
 
 	processProps(){

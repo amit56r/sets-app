@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 import React from 'react';
 import './Card.css';
 
@@ -9,9 +10,21 @@ class Card extends React.Component{
 		};
 	}
 
+	handleClick(){
+		this.setState((prevState, props) => {
+				return {selected: !prevState.selected};
+			}
+		);
+		this.props.onClick(this.props.card);
+	}
+
+	reset(){
+		console.log('reseting card state');
+	}
+
 	render() {
 		return (
-			<div className="card">
+			<div className={this.state.selected ? 'card selected' : 'card'} onClick={() => this.handleClick()}>
 				<svg height={230} width={360}>
 					<rect x={5} y={5} height={220} width={350} rx={10} ry={10} fill="white" stroke="grey" strokeWidth={2}/>
 					<this.props.handler {...this.props.card} />
@@ -26,28 +39,28 @@ class Deck{
 	constructor(handler){
 		this.handler = handler;
 		this.structure = this.handler.getStructure();
-		let { stack, keys } = this.createDeck();
+		let { stack, keys } = this.createDeck(this.structure);
 		this.stack = stack;
 		this.keys = keys;
 		console.log(this.stack)
 	}
 
-	createDeck(){
+	createDeck(structure){
 		let stack = []
-		let keys = Object.keys(this.structure);
+		let keys = Object.keys(structure);
 		this.permute(stack, [], keys, 0)
 		return { stack, keys }
 	}
 
 	permute(stack, partial, keys, index){
 		if (index >= keys.length){
-			stack.push(partial);
+			stack.push(partial.slice());
 			return;
 		}
 		let current = keys[index];
 		for( let value of this.structure[current]){
 			partial.push(value);
-			this.permute(stack, partial.slice(), keys, index + 1);
+			this.permute(stack, partial, keys, index + 1);
 			partial.pop();
 		}
 	}
@@ -69,10 +82,11 @@ class Deck{
     	}
 	}
 
-	draw(){
+	draw(props){
 		var values = this.stack.pop()
 		var property = this.zip(this.keys, values);
-		var card = <Card handler={this.handler} card={property}/>
+		var code = this.handler.encodeProperty(property)
+		var card = <Card handler={this.handler} card={property} key={code} {...props}/>
 		return { property, card};
 	}
 
